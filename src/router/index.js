@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import LoginView from '../views/authentic/login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,6 +9,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
     },
     {
       path: '/about',
@@ -23,6 +29,20 @@ const router = createRouter({
       component: () => import('../views/stu/StuList.vue')
     }
   ]
+})
+
+router.beforeEach((to, from) => {
+  // ...
+  // explicitly return false to cancel the navigation
+  // console.log('to', to);
+  // console.log('from', from);
+  if ( false && to.name !== 'login'
+    // !isAuthenticated && to.name !== 'Login'
+  ) {
+    // redirect the user to the login page
+    return { name: 'login' }
+  }
+  return true
 })
 
 export default router
