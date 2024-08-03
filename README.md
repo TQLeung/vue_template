@@ -1,3 +1,6 @@
+# pinia 持久化
+cnpm i pinia-plugin-persistedstate
+
 # vue_template
 
 This template should help get you started developing with Vue 3 in Vite.
