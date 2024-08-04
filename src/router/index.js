@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/authentic/login.vue'
+import { useAuthorityStore } from '@/stores/authority'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,9 +37,8 @@ router.beforeEach((to, from) => {
   // explicitly return false to cancel the navigation
   // console.log('to', to);
   // console.log('from', from);
-  if ( false && to.name !== 'login'
-    // !isAuthenticated && to.name !== 'Login'
-  ) {
+  const storeAuthority = useAuthorityStore();
+  if (storeAuthority.loginedToken=='clear' && to.name !== 'login') {
     // redirect the user to the login page
     return { name: 'login' }
   }
